@@ -4,8 +4,8 @@ import { AuthContextProvider } from '@/contexts/AuthContext'
 export default function App({ Component, pageProps }) {
   return (
 
-    <AuthProvider>
+    <AuthContextProvider>
         <Component { ...pageProps } />
-    </AuthProvider>
+    </AuthContextProvider>
 );
 }

@@ -6,13 +6,19 @@ const AuthContext = createContext()
 const AuthContextProvider =({children})=>{
 
 
+    let user = {
+        name :"Bipin",
+        age:"20",
+        position:"Frontend Developer"
+    }
+
     return (
-        <AuthContext.Provider >
+        <AuthContext.Provider value={{user}} >
             {children}
         </AuthContext.Provider>
         )
 }
 
-const useAuthContext = ()=>useContext(AuthContext)
+const useAuthContext = ()=> useContext(AuthContext)
 
-export {AuthContext , AuthContextProvider}
+export {useAuthContext , AuthContextProvider}
