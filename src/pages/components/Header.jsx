@@ -14,7 +14,9 @@ function HeaderComp() {
                 <Link href="/Login">
                     <Button rightIcon={<BiLogIn />} colorScheme='whiteAlpha' >Login</Button>
                 </Link>
-                <Button colorScheme='blackAlpha'>SignUp</Button>
+                <Link href={"/SignUp"}>
+                    <Button colorScheme='blackAlpha'>SignUp</Button>
+                </Link>
             </div>
         </header>
     );

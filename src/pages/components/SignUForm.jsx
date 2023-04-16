@@ -12,63 +12,62 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import Link from 'next/link';
 import axios from 'axios';
-import { useRouter } from 'next/router'
 
-const Login =async (values,router)=>{
+const SignUp = async (values)=>{
     try {
-        const response = await axios.post(`${"https://natoursyh.onrender.com/"}api/v1/users/login`,  values )
+        const response = await axios.post(`${"https://natoursyh.onrender.com/"}api/v1/users/signup`,  values )
                         console.log("reponse :",response);
-        if(response.status=="success"){
-            localStorage.setItem("token",response.data.token)
-            router.push("/MainPage")
-        }
     } catch (error) {
         console.log("error :",error)
     }
 }
+function SignUForm() {
 
-function LoginForm() {
-    const router = useRouter();
     const Schema = Yup.object().shape({
+        name:Yup.string().required("Name is required"),
         email: Yup.string()
           .email('Invalid email')
           .required('Required'),
-        password:Yup.string().required("Required")
+        password: Yup.string()
+          .min(6, 'Password must be at least 6 characters')
+          .required('Password is required'),
+        passwordConfirm: Yup.string()
+          .oneOf([Yup.ref('password'), null], 'Passwords must match')
+          .required('Confirm Password is required')
       });
     const formik = useFormik({
         enableReinitialize :true,
         initialValues: {
+            name:"",
             email: '',
-            password: ""
+            password: "",
+            passwordConfirm: ""
         },
         validationSchema :Schema,
         onSubmit: async(values) => {
             console.log(values)
-            try {
-                const response = await axios.post(`${"https://natoursyh.onrender.com/"}api/v1/users/login`,  values )
-                                console.log("reponse :",response);
-                if(response.status=="200"){
-                    localStorage.setItem("token",response.data.token)
-                    router.push({
-                        pathname: '/MainPage',
-                        query: { returnUrl: router.asPath }
-                    })
-                }
-            } catch (error) {
-                console.log("error :",error)
-            }
-            // Login(values,router)
+            SignUp(values)
             alert(JSON.stringify(values, null, 2));
         },
     });
+
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className='center-div'>
                 <div className='loginForm'>
                     {/* <div> */}
-                        <Heading as='h1' size='2xl' noOfLines={1}>Login</Heading>
-                        <p>Login to acces your account</p>
+                        <Heading as='h1' size='2xl' noOfLines={1}>Sign Up</Heading>
+                        <p>Create account to book tour</p>
                     {/* </div> */}
+                    <FormControl isInvalid={!!formik.errors.name &&formik.touched.name}>
+                        <FormLabel>Name</FormLabel>
+                        <Input id="name"
+                            name="name"
+                            type="name"
+                            onChange={formik.handleChange}
+                            value={formik.values.name} />
+                        <FormErrorMessage>{formik.errors.name}</FormErrorMessage>
+                    </FormControl>
                     <FormControl isInvalid={!!formik.errors.email &&formik.touched.email}>
                         <FormLabel>Email address</FormLabel>
                         <Input id="email"
@@ -86,14 +85,22 @@ function LoginForm() {
                             value={formik.values.password} type='password' />
                         <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
                     </FormControl>
+                    <FormControl isInvalid={!!formik.errors.passwordConfirm &&formik.touched.passwordConfirm}>
+                        <FormLabel>Confirm Password</FormLabel>
+                        <Input id="passwordConfirm"
+                            name="passwordConfirm"
+                            onChange={formik.handleChange}
+                            value={formik.values.passwordConfirm} type='password' />
+                        <FormErrorMessage>{formik.errors.passwordConfirm}</FormErrorMessage>
+                    </FormControl>
                     <div className='login-btn'>
-                        <Button width="100%" type="submit">Login</Button>
+                        <Button width="100%" type="submit">Sign Up</Button>
                     </div>
-                    <div className='center-center'>Don't have an account ? <Link href="/SignUp"> Sign Up</Link></div>
+                    <div className='center-center'>Have an account ? <Link href="/Login">Login</Link></div>
                 </div>
             </div>
         </form>
     )
 }
 
-export default LoginForm
+export default SignUForm
