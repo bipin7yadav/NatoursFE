@@ -13,22 +13,15 @@ import * as Yup from "yup";
 import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/router'
-
-const Login =async (values,router)=>{
-    try {
-        const response = await axios.post(`${"https://natoursyh.onrender.com/"}api/v1/users/login`,  values )
-                        console.log("reponse :",response);
-        if(response.status=="success"){
-            localStorage.setItem("token",response.data.token)
-            router.push("/MainPage")
-        }
-    } catch (error) {
-        console.log("error :",error)
-    }
-}
+import { useAuthContext } from '@/contexts/AuthContext';
 
 function LoginForm() {
+    const {Login ,user}= useAuthContext()
+
+
     const router = useRouter();
+
+
     const Schema = Yup.object().shape({
         email: Yup.string()
           .email('Invalid email')
@@ -43,21 +36,21 @@ function LoginForm() {
         },
         validationSchema :Schema,
         onSubmit: async(values) => {
+            Login(values,router)
             console.log(values)
-            try {
-                const response = await axios.post(`${"https://natoursyh.onrender.com/"}api/v1/users/login`,  values )
-                                console.log("reponse :",response);
-                if(response.status=="200"){
-                    localStorage.setItem("token",response.data.token)
-                    router.push({
-                        pathname: '/MainPage',
-                        query: { returnUrl: router.asPath }
-                    })
-                }
-            } catch (error) {
-                console.log("error :",error)
-            }
-            // Login(values,router)
+            // try {
+            //     const response = await axios.post(`${"https://natoursyh.onrender.com/"}api/v1/users/login`,  values )
+            //                     console.log("reponse :",response);
+            //     if(response.status=="200"){
+            //         localStorage.setItem("token",response.data.token)
+            //         router.push({
+            //             pathname: '/MainPage',
+            //             query: { returnUrl: router.asPath }
+            //         })
+            //     }
+            // } catch (error) {
+            //     console.log("error :",error)
+            // }
             alert(JSON.stringify(values, null, 2));
         },
     });

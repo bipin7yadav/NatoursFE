@@ -12,16 +12,14 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import Link from 'next/link';
 import axios from 'axios';
+import { useRouter } from 'next/router'
+import { useAuthContext } from '@/contexts/AuthContext';
 
-const SignUp = async (values)=>{
-    try {
-        const response = await axios.post(`${"https://natoursyh.onrender.com/"}api/v1/users/signup`,  values )
-                        console.log("reponse :",response);
-    } catch (error) {
-        console.log("error :",error)
-    }
-}
 function SignUForm() {
+
+    const {SignUp,user}= useAuthContext()
+    console.log(user);
+    const router = useRouter();
 
     const Schema = Yup.object().shape({
         name:Yup.string().required("Name is required"),
@@ -46,7 +44,7 @@ function SignUForm() {
         validationSchema :Schema,
         onSubmit: async(values) => {
             console.log(values)
-            SignUp(values)
+            await SignUp(values,router)
             alert(JSON.stringify(values, null, 2));
         },
     });
