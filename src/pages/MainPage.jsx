@@ -1,5 +1,6 @@
 import React, { useEffect, } from 'react'
 import { useAuthContext } from '@/contexts/AuthContext'
+import Card from './components/Card'
 
 function MainPage() {
     const { GetAllTours, state: { tours } } = useAuthContext()
@@ -10,22 +11,19 @@ function MainPage() {
         }
         fetchData();
     }, [])
-    console.log("tours :", tours.map((a) => a.name));
+    console.log("tours :", tours);
     return (
-        <div>
-            Tours
-
-            <ol>
+        <div className='card-container'>
 
                 {
                     tours.map((a) => {
                         return (
-
-                            <li key={a.id}>{a.name}</li>
+                            <>
+                            <Card tour={a}/>
+                            </>
                         )
                     })
                 }
-            </ol>
         </div>
     )
 }
