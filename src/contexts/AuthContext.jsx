@@ -25,7 +25,8 @@ const AuthContextProvider = ({ children }) => {
         position: "Frontend Developer"
     }
     const initialState ={
-        tours :[]
+        tours :[],
+        users : []
     }
 
     const reducer = (state,action)=>{
@@ -33,6 +34,11 @@ const AuthContextProvider = ({ children }) => {
             case "getAllTours":{
                 return{
                     ...state,tours:action.payload
+                }
+            }
+            case "getAllUsers":{
+                return {
+                    ...state,users:action.payload
                 }
             }
                 
@@ -75,6 +81,74 @@ const AuthContextProvider = ({ children }) => {
             }
     }
 
+    const GetUsers = async(values) =>{
+        try {
+            let response = axios.get(`${URL}api/v1/users`,headers)
+            if(response.status=="200"){
+                dispatch({
+                    type :"getAllUsers",
+                    payload:response.data.data.users
+                })
+            }
+        } catch (error) {
+            
+        }
+    }
+
+    const ForgetPassword = async({email})=>{
+        try {
+            let response = axios.post(`${URL}api/v1/users/forgotPassword`,{email})
+            
+        } catch (error) {
+            
+        }
+    }
+
+    const GetCurrentUser = async()=>{
+        try {
+            let response = axios.get(`${URL}api/v1/users/me`,headers)
+            return response.data.data
+        } catch (error) {
+            
+        }
+    }
+
+    const Resetpassword = async({id,password ,passwordConfirm})=>{
+        try {
+            const response = await axios.patch(`${URL}api/v1/users/resetPassword/${id}`,{password,passwordConfirm},headers)
+
+        } catch (error) {
+            
+        }
+    }
+
+    const updateCurrentUserPassword = async({id,passwordCurrent,password ,passwordConfirm})=>{
+        try {
+            const response = await axios.patch(`${URL}api/v1/users/updateMyPassword/${id}`,{password,passwordConfirm},headers)
+
+        } catch (error) {
+            
+        }
+    }
+
+    const updateCurrentUserData= async({id,...values})=>{
+        try {
+            const response = await axios.patch(`${URL}api/v1/users/updateMyPassword/${id}`,{...values},headers)
+
+        } catch (error) {
+            
+        }
+    }
+
+    const deleteCurrentUser= async({id})=>{
+        try {
+            const response = await axios.delete(`${URL}api/v1/users/deleteMe/${id}`,headers)
+
+        } catch (error) {
+            
+        }
+    }
+
     const GetAllTours = async() =>{
         try {
             const response = await axios.get(`${URL}api/v1/tours`,headers)
@@ -94,7 +168,8 @@ const AuthContextProvider = ({ children }) => {
     const [state,dispatch ] = useReducer(reducer,initialState)
 
     return (
-        <AuthContext.Provider value={{ user ,Login ,SignUp, GetAllTours,state}} >
+        <AuthContext.Provider value={{ user ,Login ,SignUp, GetAllTours,state,updateCurrentUserData,updateCurrentUserPassword,
+        deleteCurrentUser, Resetpassword ,GetCurrentUser ,GetUsers , ForgetPassword}} >
             {children}
         </AuthContext.Provider>
     )

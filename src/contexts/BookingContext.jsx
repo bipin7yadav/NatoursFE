@@ -42,10 +42,12 @@ function BookingContextProvider() {
 
     const [state,dispatch ] = useReducer(reducer,initialState)
     return (
-        <BookingContext.Provider>
+        <BookingContext.Provider value={{}}>
             {Children}
         </BookingContext.Provider>
     )
 }
 
-export default {BookingContext,BookingContextProvider}
+const useBookingContext =()=>useContext(BookingContext)
+
+export {useBookingContext,BookingContextProvider}
