@@ -9,17 +9,17 @@ import { useRouter } from 'next/router';
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   console.log(router);
-  let block = router.asPath.includes('/Login') ? "none" : "block"
-  console.log(block);
+  // let block = router.asPath.includes('/Login') ? "none" : "block"
+  // console.log(block);
   return (
 
     <ChakraProvider>
       <AuthContextProvider>
-        <ToursContextProvider>
-          <HeaderComp style={{ display: { block } }} />
+        {/* <ToursContextProvider> */}
+          <HeaderComp  />
           <Component {...pageProps} />
           {/* <Footer/> */}
-        </ToursContextProvider>
+        {/* </ToursContextProvider> */}
       </AuthContextProvider>
     </ChakraProvider>
   );

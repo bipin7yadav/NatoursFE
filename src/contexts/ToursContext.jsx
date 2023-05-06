@@ -214,7 +214,7 @@ function ToursContextProvider() {
     const [state, dispatch] = useReducer(toursReducer, initialTourState) 
     return (
         <ToursContext.Provider value={{state,
-            GetAllTours,
+            // GetAllTours,
              PostTour, DeleteTour, UpdateTour, GetMonthlyPlan, GetTopFiveTour, GetTour,
             DeleteReview, CreateReview, CreateReviewOnTour, UpdateReview, GetAReview, GetReviews, GetReviewOnTour
         }}>

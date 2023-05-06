@@ -9,7 +9,10 @@ import { BiLogIn, BiLogOut } from "react-icons/bi"
 function HeaderComp() {
     return (
         <header className='header'>
-            <h1>Natours</h1>
+            {/* <h1>Natours</h1> */}
+            <Link href="/MainPage">
+                    <h1 >Natours</h1>
+                </Link>
             <div className='btn-group'>
                 <Link href="/Login">
                     <Button rightIcon={<BiLogIn />} colorScheme='whiteAlpha' >Login</Button>

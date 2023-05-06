@@ -152,7 +152,7 @@ function Tour({id}) {
                     <div className="cta__content">
                         <h2 className="heading-secondary">What are you waiting for?</h2>
                         <p className="cta__text">4 days. 1 adventure. Infinite memories. Make it yours today!</p>
-                        <a className="btn btn--green span-all-rows" href="/login">Log in to book tour</a>
+                        <a className="btn btn--green span-all-rows" href="/Login">Log in to book tour</a>
                     </div>
                 </div>
             </section>
