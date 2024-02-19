@@ -1,15 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+// import src\pages\components\toursImg\tour-1-1.jpg
+import tour2 from "./toursImg/tour-1-cover.jpg"
 
 function Card({tour}) {
+    let img = `./toursImg/${tour.imageCover}`
     return (
         <>
             <div class="card">
                 <div class="card__header">
                     <div class="card__picture">
                         <div class="card__picture-overlay">&nbsp;</div>
-                        <Image width={100} height={100} class="card__picture-img" src={`/tours/${tour.imageCover}`} alt={tour.name}/>
+                        <Image width={100} height={100} class="card__picture-img" src={tour2} alt={tour.name}/>
                     </div>
                     <h3 class="heading-tertirary">
                         <span>{tour.name}</span>
@@ -46,10 +49,10 @@ function Card({tour}) {
                 <div class="card__footer">
                     <p>
                         <span class="card__footer-value">${tour.price}</span>
-                        <span class="card__footer-text">per person</span>
+                        <span class="card__footer-text"> per person</span>
                     </p>
                     <p class="card__ratings">
-                        <span class="card__footer-value">{tour.ratingsAverage}</span>
+                        <span class="card__footer-value">{tour.ratingsAverage} </span>
                         <span class="card__footer-text">rating ({tour.ratingsQuantity})</span>
                     </p>
                     <Link class="btn btn--green btn--small" href={`/tour/${encodeURIComponent(tour.name)}`} passHref> Details</Link>

@@ -3,9 +3,17 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
-  min-height: 90vh;
+  /* padding: 6rem; */
+  min-height: 87.5vh;
+  width: 100vw;
   background-color: white;
+  background-image: url("./../pages/TourImg/homeImg.jpg");
+  background-size: cover;
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .description {
@@ -107,4 +115,19 @@
 
 .logo {
   position: relative;
+}
+
+.fixedHeader{
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  border-radius: 8px;
+  background-Image: linear-gradient( to bottom right, rgba(125, 213, 111, 0.85), rgba(40, 180, 135, 0.85) );
+  opacity:0.6;
+  position:fixed;
+  top: 1rem;
+  z-index: 101;
 }

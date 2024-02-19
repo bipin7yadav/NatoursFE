@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
     <ChakraProvider>
       <AuthContextProvider>
         {/* <ToursContextProvider> */}
-          <HeaderComp  />
+          {/* <HeaderComp  /> */}
           <Component {...pageProps} />
           {/* <Footer/> */}
         {/* </ToursContextProvider> */}
