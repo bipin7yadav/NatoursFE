@@ -5,7 +5,7 @@ import Link from 'next/link'
 import tour2 from "./toursImg/tour-1-cover.jpg"
 
 function Card({tour}) {
-    let img = `./toursImg/${tour.imageCover}`
+    // let img = `./toursImg/${tour.imageCover}`
     return (
         <>
             <div class="card">
