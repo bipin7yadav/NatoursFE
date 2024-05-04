@@ -14,8 +14,8 @@ const AuthContextProvider = ({ children }) => {
         'Cookie': `jwt=${token}`
     };
 
-    // let URL = "https://natoursyh.onrender.com/"
-    let URL = "http://127.0.0.1:3001/"
+    let URL = "https://natoursyh.onrender.com/"
+    // let URL = "http://127.0.0.1:3001/"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -75,7 +75,7 @@ const AuthContextProvider = ({ children }) => {
                 if(response.status=="200"){
                     localStorage.setItem("token",response.data.token)
                     router.push({
-                        pathname: '/MainPage',
+                        pathname: '/',
                     })
                 }
             } catch (error) {
